@@ -2,15 +2,17 @@ apiVersion: v1
 kind: Service
 metadata:
   name: mariadb-service
-  labels:
-    app: mariadb
 spec:
-  ports:
-  - port: 3306
-    name: mariadb-port
-  clusterIP: None
   selector:
     app: mariadb
+  type: NodePort
+  ports:
+  - name: port3306
+    protocol: TCP
+    port: 3306
+    targetPort: 3306
+
+    
 ---
 apiVersion: apps/v1
 kind: StatefulSet
